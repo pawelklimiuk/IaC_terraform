@@ -5,7 +5,7 @@ variable "availability_zones" {
 
 variable "aws_key_name" {
   type        = string
-  description = "Nawa klucza dodanego w AWS"
+  description = "Nazwa klucza dodanego w AWS"
 }
 
 variable "ssh_key_path" {
