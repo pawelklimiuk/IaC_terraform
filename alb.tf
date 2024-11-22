@@ -1,5 +1,5 @@
 resource "aws_default_subnet" "default_az" {
-  count            = length(var.availability_zones)
+  count             = length(var.availability_zones)
   availability_zone = var.availability_zones[count.index]
 }
 

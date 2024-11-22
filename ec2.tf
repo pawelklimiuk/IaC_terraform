@@ -1,5 +1,5 @@
 data "aws_ami" "latest_ubuntu" {
-  owners           = ["099720109477"]
+  owners      = ["099720109477"]
   most_recent = true
 
   filter {
@@ -9,14 +9,14 @@ data "aws_ami" "latest_ubuntu" {
 }
 
 resource "aws_instance" "panda" {
-  depends_on = [null_resource.download_ssh_key]
+  depends_on             = [null_resource.download_ssh_key]
   count                  = length(var.availability_zones)
   ami                    = data.aws_ami.latest_ubuntu.image_id
   instance_type          = "t2.micro"
   availability_zone      = var.availability_zones[count.index]
   key_name               = var.aws_key_name
   vpc_security_group_ids = [aws_security_group.sg_pub.id]
-  subnet_id = aws_default_subnet.default_az[count.index].id
+  subnet_id              = aws_default_subnet.default_az[count.index].id
 }
 
 resource "aws_security_group" "sg_pub" {
@@ -42,12 +42,12 @@ resource "aws_security_group" "sg_pub" {
   }
 }
 
-# output
+## output
 
-output "alb_dns_name" {
-  value = aws_lb.alb.dns_name
-}
+# output "alb_dns_name" {
+#   value = aws_lb.alb.dns_name
+# }
 
-output "ami_id" {
-  value = data.aws_ami.latest_ubuntu.image_id
-}
+# output "ami_id" {
+#   value = data.aws_ami.latest_ubuntu.image_id
+# }
